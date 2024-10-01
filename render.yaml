@@ -1,0 +1,23 @@
+version: 1
+services:
+  - type: web
+    name: my-app
+    env: docker
+    buildCommand: |
+      apt-get update && apt-get install -y \
+      libleptonica-dev \
+      tesseract-ocr \
+      tesseract-ocr-dev \
+      libtesseract-dev \
+      python3-pil \
+      tesseract-ocr-eng \
+      tesseract-ocr-script-latn \
+      poppler-utils \  # Install Poppler utilities
+      && rm -rf /var/lib/apt/lists/* \
+      && pip install -r requirements.txt \
+      && pip install --upgrade pip
+    startCommand: streamlit run main.py --server.port $PORT --server.address 0.0.0.0
+
+
+
+
